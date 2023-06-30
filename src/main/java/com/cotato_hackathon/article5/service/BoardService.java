@@ -1,12 +1,9 @@
 package com.cotato_hackathon.article5.service;
 
-import com.cotato_hackathon.article5.dto.BoardResponseDto;
 import com.cotato_hackathon.article5.dto.BoardSaveRequestDto;
-import com.cotato_hackathon.article5.entity.Center;
 import com.cotato_hackathon.article5.entity.Meeting;
-import com.cotato_hackathon.article5.repository.CenterRepository;
 import com.cotato_hackathon.article5.repository.MeetingRepository;
-import org.hibernate.annotations.NotFoundAction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class BoardService {
     private final MeetingRepository meetingRepository;
-    private final CenterRepository centerRepository;
 
-    public BoardService(MeetingRepository meetingRepository, CenterRepository centerRepository) {
+    @Autowired
+    public BoardService(MeetingRepository meetingRepository) {
         this.meetingRepository = meetingRepository;
-        this.centerRepository = centerRepository;
     }
+
 
     //모임 저장 로직
     @Transactional
@@ -74,7 +71,7 @@ public class BoardService {
 
     //상세페이지 조회 메서드
     public Meeting findMeetingById(Long meetingId){
-        Meeting meeting = meetingRepository.findById(meetingId).orElseThrow(() -> new NoSuchElementException());;
+        Meeting meeting = meetingRepository.findById(meetingId).orElseThrow(() -> new NoSuchElementException());
         return meeting;
     }
 
