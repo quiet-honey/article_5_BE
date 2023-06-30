@@ -15,7 +15,6 @@ public class SeniorApiController {
 
     private final SeniorService seniorService;
 
-
     @PutMapping("/mypage")//회원정보 수정
     public String update(@RequestBody SeniorUpdateRequestDto requestDto){
         return seniorService.update(requestDto);
@@ -27,11 +26,11 @@ public class SeniorApiController {
     }
 
     @GetMapping("/mypage/memberlist")//승인 대기자
-    public SeniorParticipantResponseDto findAllParticipant(Long meetingId){
+    public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         return seniorService.findAllParticipant(meetingId);
     }
 
-    @DeleteMapping("/signout")
+    @DeleteMapping("signout")
     public String signout(){
         return seniorService.signout();
     }
