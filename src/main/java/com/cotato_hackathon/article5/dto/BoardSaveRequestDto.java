@@ -13,6 +13,7 @@ public class BoardSaveRequestDto {
     private String notice;
     private String place;
     private LocalDateTime meetingTime;
+    private Long currentSenior;
     private Long totalSenior;
 
 }
