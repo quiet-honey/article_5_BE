@@ -31,7 +31,8 @@ public class Meeting {
     @Column(nullable = false)
     private Long totalSenior;
     @Column(nullable = false)
-    private Long currentSenior;
+    @Builder.Default
+    private Long currentSenior = 0L;
     @ManyToOne
     @JoinColumn(name = "seniorId")
     private Senior senior;
