@@ -41,4 +41,13 @@ public class Meeting {
     @OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL)
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
+    @Builder
+    public Meeting(String title, String notice, String place, LocalDateTime meetingTime, Long totalSenior) {
+        this.title = title;
+        this.notice = notice;
+        this.place = place;
+        this.meetingTime = meetingTime;
+        this.totalSenior = totalSenior;
+    }
+
 }
