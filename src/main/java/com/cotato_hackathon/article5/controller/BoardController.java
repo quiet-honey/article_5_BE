@@ -33,7 +33,7 @@ public class BoardController {
 
     //모임 검색 api(검색 후 모임 조회)
     @GetMapping
-    public ResponseEntity<BoardSearchResponseDto> getMetting(
+    public ResponseEntity<BoardSearchResponseDto> getMeeting(
             @RequestParam(value = "dis") String dis,
             @RequestParam(value = "ngb") String ngb,
             @RequestParam(value = "sortBy") String sortBy) {

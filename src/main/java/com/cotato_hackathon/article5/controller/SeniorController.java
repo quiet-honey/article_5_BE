@@ -25,7 +25,7 @@ public class SeniorController {
         return seniorService.findAllMeeting();
     }
 
-    @GetMapping("/mypage/memberlist")//승인 대기자
+    @GetMapping("/mypage/memberlist") // 승인 대기자
     public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         return seniorService.findAllParticipant(meetingId);
     }

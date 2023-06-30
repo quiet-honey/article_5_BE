@@ -19,7 +19,6 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //고객 id = auto increment
     private Long enrollId;
 
-
     @Column(nullable = false)
     private boolean approved;
 

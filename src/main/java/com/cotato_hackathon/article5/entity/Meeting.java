@@ -25,8 +25,6 @@ public class Meeting {
     @Column
     private String notice;
     @Column(nullable = false)
-    private String place;
-    @Column(nullable = false)
     private LocalDateTime meetingTime;
     @Column(nullable = false)
     private Long totalSenior;
@@ -44,13 +42,15 @@ public class Meeting {
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
     @Builder
-    public Meeting(String title, String notice, String place, LocalDateTime meetingTime, Long currentSenior, Long totalSenior) {
+    public Meeting(String title, String notice, LocalDateTime meetingTime,
+                   Long totalSenior, Senior senior, Center center) {
         this.title = title;
         this.notice = notice;
-        this.place = place;
         this.meetingTime = meetingTime;
-        this.currentSenior = currentSenior;
+        this.currentSenior = 0L;
         this.totalSenior = totalSenior;
+        this.senior = senior;
+        this.center = center;
     }
 
 }

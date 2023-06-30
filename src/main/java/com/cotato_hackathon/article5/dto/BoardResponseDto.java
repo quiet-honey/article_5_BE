@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class BoardResponseDto {
     private String title;
     private String notice;
-    private String place;
+    private String centerName;
     private LocalDateTime meetingTime;
     private Long totalSenior;
     private Long currentSenior;
@@ -21,7 +21,7 @@ public class BoardResponseDto {
     public BoardResponseDto(Meeting meeting) {
         this.title = meeting.getTitle();
         this.notice = meeting.getNotice();
-        this.place = meeting.getPlace();
+        this.centerName = meeting.getCenter().getCenterName();
         this.meetingTime = meeting.getMeetingTime();
         this.totalSenior = meeting.getTotalSenior();
         this.currentSenior = meeting.getCurrentSenior();

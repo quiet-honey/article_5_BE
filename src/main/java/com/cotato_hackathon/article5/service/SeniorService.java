@@ -34,6 +34,10 @@ public class SeniorService {
     public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         Meeting meeting = meetingRepository.findById(meetingId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 모임이 없습니다. meetingId = "+meetingId));
+        Senior senior = validateService.validateSenior();
+        if(!meeting.getSenior().getSeniorId().equals(senior.getSeniorId())){
+            throw new RuntimeException("자신이 연 모임이 아닙니다.");
+        }
         return enrollmentRepository.findAllByMeeting(meeting).stream()
                 .map(SeniorParticipantResponseDto::new)
                 .collect(Collectors.toList());

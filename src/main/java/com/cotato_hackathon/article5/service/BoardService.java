@@ -1,10 +1,11 @@
 package com.cotato_hackathon.article5.service;
 
 import com.cotato_hackathon.article5.dto.BoardSaveRequestDto;
+import com.cotato_hackathon.article5.entity.Center;
 import com.cotato_hackathon.article5.entity.Meeting;
+import com.cotato_hackathon.article5.entity.senior.Senior;
 import com.cotato_hackathon.article5.repository.CenterRepository;
 import com.cotato_hackathon.article5.repository.MeetingRepository;
-import org.hibernate.annotations.NotFoundAction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,17 +20,22 @@ import java.util.stream.Collectors;
 public class BoardService {
     private final MeetingRepository meetingRepository;
     private final CenterRepository centerRepository;
+    private final ValidateService validateService;
 
-    public BoardService(MeetingRepository meetingRepository, CenterRepository centerRepository) {
+    public BoardService(MeetingRepository meetingRepository, CenterRepository centerRepository, ValidateService validateService) {
         this.meetingRepository = meetingRepository;
         this.centerRepository = centerRepository;
+        this.validateService = validateService;
     }
 
     //모임 저장 로직
     @Transactional
     public Meeting createMeeting(BoardSaveRequestDto boardSaveRequestDto) {
-        final Meeting newMeeting = new Meeting(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getNotice(), boardSaveRequestDto.getPlace(),
-                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getCurrentSenior(), boardSaveRequestDto.getTotalSenior());
+        Senior senior = validateService.validateSenior();
+        Center center = centerRepository.findByCenterName(boardSaveRequestDto.getCenterName())
+                .orElseThrow(() -> new RuntimeException("해당 이름의 경로당은 존재하지 않습니다."));
+        final Meeting newMeeting = new Meeting(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getNotice(),
+                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getTotalSenior(), senior, center);
         return meetingRepository.save(newMeeting);
     }
 
@@ -72,7 +78,7 @@ public class BoardService {
 
     //상세페이지 조회 메서드
     public Meeting findMeetingById(Long meetingId){
-        Meeting meeting = meetingRepository.findById(meetingId).orElseThrow(() -> new NoSuchElementException());
+        Meeting meeting = meetingRepository.findById(meetingId).orElseThrow(NoSuchElementException::new);
         return meeting;
     }
 
