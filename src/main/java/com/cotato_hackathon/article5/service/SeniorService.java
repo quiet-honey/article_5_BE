@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -31,13 +32,24 @@ public class SeniorService {
         return meetingRepository.findAllBySenior(senior);
     }
 
-    @Transactional
-    public SeniorParticipantResponseDto findAllParticipant(Long meetingId){
+//    @Transactional
+//    public List<Enrollment>  findAllParticipant(Long meetingId){
+//        Meeting meeting = meetingRepository.findById(meetingId)
+//                .orElseThrow(()-> new IllegalArgumentException("해당 모임이 없습니다. meetingId = "+meetingId));
+//        List<Enrollment> enrollment = enrollmentRepository.findAllByMeeting(meeting);
+//
+//        return enrollment;
+//    }
+
+
+    public List<SeniorParticipantResponseDto>  findAllParticipant(Long meetingId){
         Meeting meeting = meetingRepository.findById(meetingId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 모임이 없습니다. meetingId = "+meetingId));
-        List<Enrollment> enrollment = enrollmentRepository.findAllByMeeting(meeting);
-        return new SeniorParticipantResponseDto(enrollment);
+        return enrollmentRepository.findAllByMeeting(meeting).stream()
+                .map(SeniorParticipantResponseDto::new)
+                .collect(Collectors.toList());
     }
+
 
     @Transactional
     public String update(SeniorUpdateRequestDto requestDto){

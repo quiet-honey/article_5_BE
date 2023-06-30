@@ -2,6 +2,7 @@ package com.cotato_hackathon.article5.controller;
 
 import com.cotato_hackathon.article5.dto.SeniorParticipantResponseDto;
 import com.cotato_hackathon.article5.dto.SeniorUpdateRequestDto;
+import com.cotato_hackathon.article5.entity.Enrollment;
 import com.cotato_hackathon.article5.entity.Meeting;
 import com.cotato_hackathon.article5.service.SeniorService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,13 @@ public class SeniorApiController {
     }
 
     @GetMapping("/mypage/memberlist")//승인 대기자
-    public SeniorParticipantResponseDto findAllParticipant(Long meetingId){
+    public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         return seniorService.findAllParticipant(meetingId);
     }
 
+//    @GetMapping("/mypage/memberlist")//승인 대기자
+//    public List<Enrollment> findAllParticipant(Long meetingId){
+//        return seniorService.findAllParticipant(meetingId);
+//    }
 
 }
