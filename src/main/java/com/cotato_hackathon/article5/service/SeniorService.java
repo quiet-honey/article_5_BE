@@ -1,4 +1,5 @@
 package com.cotato_hackathon.article5.service;
+import com.cotato_hackathon.article5.dto.BoardDetailResponseDto;
 import com.cotato_hackathon.article5.dto.SeniorParticipantResponseDto;
 import com.cotato_hackathon.article5.entity.senior.Senior;
 
@@ -23,23 +24,12 @@ public class SeniorService {
     private final ValidateService validateService;
 
 
-    @Transactional
-    public List<Meeting> findAllMeeting(Long seniorId){
-        Senior senior = seniorRepository.findById(seniorId)
-                .orElseThrow(()-> new IllegalArgumentException("해당 사용자가 없습니다. seniorid = "+seniorId));
-
-        return meetingRepository.findAllBySenior(senior);
+    // 자신이 연 모든 모임 조회
+    public List<BoardDetailResponseDto> findAllMeeting(){
+        Senior senior = validateService.validateSenior();
+        return meetingRepository.findAllBySenior(senior).stream()
+                .map(BoardDetailResponseDto::new).collect(Collectors.toList());
     }
-
-//    @Transactional
-//    public List<Enrollment>  findAllParticipant(Long meetingId){
-//        Meeting meeting = meetingRepository.findById(meetingId)
-//                .orElseThrow(()-> new IllegalArgumentException("해당 모임이 없습니다. meetingId = "+meetingId));
-//        List<Enrollment> enrollment = enrollmentRepository.findAllByMeeting(meeting);
-//
-//        return enrollment;
-//    }
-
 
     public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         Meeting meeting = meetingRepository.findById(meetingId)
@@ -48,7 +38,6 @@ public class SeniorService {
                 .map(SeniorParticipantResponseDto::new)
                 .collect(Collectors.toList());
     }
-
 
     @Transactional
     public String update(SeniorUpdateRequestDto requestDto){

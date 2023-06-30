@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +19,6 @@ public class BoardDetailResponseDto {
     private LocalDateTime meetingTime;
     private Long totalSenior;
     private Long currentSenior;
-    private List<String> attendList;
 
     public BoardDetailResponseDto(Meeting meeting) {
         this.meetingID = meeting.getMeetingId();
