@@ -29,4 +29,11 @@ public class Enrollment {
     @Column(nullable = false)
     private boolean isApproved;
 
+    @Builder
+    public Enrollment (Senior senior, Meeting meeting, boolean isApproved) {
+        this.senior = senior;
+        this.meeting = meeting;
+        this.isApproved = isApproved;
+    }
+
 }

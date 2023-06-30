@@ -1,10 +1,8 @@
 package com.cotato_hackathon.article5.controller;
 
-import com.cotato_hackathon.article5.dto.BoardDetailResponseDto;
-import com.cotato_hackathon.article5.dto.BoardResponseDto;
-import com.cotato_hackathon.article5.dto.BoardSaveRequestDto;
-import com.cotato_hackathon.article5.dto.BoardSearchResponseDto;
+import com.cotato_hackathon.article5.dto.*;
 import com.cotato_hackathon.article5.entity.Meeting;
+import com.cotato_hackathon.article5.entity.senior.Senior;
 import com.cotato_hackathon.article5.service.BoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,4 +54,17 @@ public class BoardController {
                 new BoardDetailResponseDto(boardService.findMeetingById(meetingId))
         );
     }
+
+    //참여신청
+    @PostMapping
+    public ResponseEntity<BoardAttendResponseDto> memberApply(
+            @RequestBody BoardAttendRequestDto boardAttendRequestDto) {
+        try {
+            Senior senior = boardService.apply(boardAttendRequestDto);
+            return new ResponseEntity("참여신청이 완료되었습니다. (memberId : " + senior.getEmail() + ")", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("이미 참여신청된 모임 입니다.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
