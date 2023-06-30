@@ -68,10 +68,9 @@ public class Senior {
         this.refreshToken = updateRefreshToken;
     }
 
-    public void updateName(String nickname) { this.name = name; }
+    public void updateName(String name) { this.name = name; }
 
-    public void update(String name, String phone) {
-        this.name = name;
+    public void updatePhone(String phone) {
         this.phone = phone;
     }
 }

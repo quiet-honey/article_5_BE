@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class SeniorApiController {
+public class SeniorController {
 
     private final SeniorService seniorService;
 

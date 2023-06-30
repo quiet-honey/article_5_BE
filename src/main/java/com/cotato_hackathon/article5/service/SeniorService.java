@@ -41,7 +41,7 @@ public class SeniorService {
 //    }
 
 
-    public List<SeniorParticipantResponseDto>  findAllParticipant(Long meetingId){
+    public List<SeniorParticipantResponseDto> findAllParticipant(Long meetingId){
         Meeting meeting = meetingRepository.findById(meetingId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 모임이 없습니다. meetingId = "+meetingId));
         return enrollmentRepository.findAllByMeeting(meeting).stream()
@@ -52,12 +52,9 @@ public class SeniorService {
 
     @Transactional
     public String update(SeniorUpdateRequestDto requestDto){
-        Senior senior = seniorRepository.findById(requestDto.getSeniorId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 사용자가 없습니다. seniorid = "+requestDto.getSeniorId()));
-
-        //이름, 전화번호 수
-        senior.update(requestDto.getName(), requestDto.getPhone());
-
+        Senior senior = validateService.validateSenior();
+        senior.updateName(requestDto.getName());
+        senior.updatePhone(requestDto.getPhone());
         return "OK";
     }
 
