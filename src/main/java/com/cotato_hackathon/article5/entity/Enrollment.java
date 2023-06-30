@@ -1,5 +1,6 @@
 package com.cotato_hackathon.article5.entity;
 
+import com.cotato_hackathon.article5.entity.senior.Senior;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
