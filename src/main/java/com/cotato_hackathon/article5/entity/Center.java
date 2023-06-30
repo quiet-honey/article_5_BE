@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,5 +32,5 @@ public class Center {
     private String detail;
 
     @OneToMany(mappedBy = "center", cascade = CascadeType.ALL)
-    List<Meeting> meetingList;
+    List<Meeting> meetingList = new ArrayList<>();
 }

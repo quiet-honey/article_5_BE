@@ -1,6 +1,6 @@
 package com.cotato_hackathon.article5.entity;
 
-import com.cotato_hackathon.article5.entity.Meeting;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,23 +11,25 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "senior")
 public class Senior {
     //필드
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seniorId", unique = true, nullable = false)
-    private Long memberId;
+    private Long seniorId;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String phone;
     @Column(nullable = false)
     private Long prefer;
-    @OneToMany(mappedBy = "meeting")
+
+    @OneToMany(mappedBy = "senior")
     private List<Meeting> meetingList = new ArrayList<>();
-    @OneToMany(mappedBy = "enrollment")
+
+    @OneToMany(mappedBy = "senior")
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
     //빌더
