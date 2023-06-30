@@ -5,10 +5,7 @@ import com.cotato_hackathon.article5.dto.SeniorUpdateRequestDto;
 import com.cotato_hackathon.article5.entity.Meeting;
 import com.cotato_hackathon.article5.service.SeniorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,8 @@ public class SeniorApiController {
         return seniorService.findAllParticipant(meetingId);
     }
 
-
+    @DeleteMapping("/signout")
+    public String signout(){
+        return seniorService.signout();
+    }
 }

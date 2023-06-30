@@ -21,6 +21,7 @@ public class SeniorService {
     private final SeniorRepository seniorRepository;
     private final MeetingRepository meetingRepository;
     private final EnrollmentRepository enrollmentRepository;
+    private final ValidateService validateService;
 
 
     @Transactional
@@ -48,5 +49,12 @@ public class SeniorService {
         senior.update(requestDto.getName(), requestDto.getPhone());
 
         return "OK";
+    }
+
+    @Transactional
+    public String signout(){
+        Senior senior = validateService.validateSenior();
+        seniorRepository.deleteById(senior.getSeniorId());
+        return "회원 탈퇴 완료";
     }
 }
