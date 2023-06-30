@@ -32,8 +32,8 @@ public class BoardService {
         return meetingRepository.save(newMeeting);
     }
 
-    //param 으로 아예 tags 나 keyword 를 포함하지 않을 수도 있기 때문에 ==null 로 비교
-    //null 일 때 alert 메시지 띄우는걸로
+    // param 으로 아예 tags 나 keyword 를 포함하지 않을 수도 있기 때문에 ==null 로 비교
+    // null 일 때 alert 메시지 띄우는걸로
     public List<Meeting> findAllMeetings(String dis, String ngb) {
         //모집 여부 상태 확인
         //changeAllClubStatus();
