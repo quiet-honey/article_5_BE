@@ -1,6 +1,5 @@
 package com.cotato_hackathon.article5.dto;
 
-import com.cotato_hackathon.article5.entity.Meeting;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +10,8 @@ import java.time.LocalDateTime;
 public class BoardSaveRequestDto {
     private String title;
     private String notice;
-    private String place;
+    private String centerName;
     private LocalDateTime meetingTime;
-    private Long currentSenior;
     private Long totalSenior;
 
 }

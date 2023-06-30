@@ -2,6 +2,7 @@ package com.cotato_hackathon.article5.entity.senior;
 
 import com.cotato_hackathon.article5.entity.Enrollment;
 import com.cotato_hackathon.article5.entity.Meeting;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,9 +28,11 @@ public class Senior {
     private String phone;
     @Column(nullable = false)
     private Long prefer;
+
     @Column(nullable = false)
     private String email;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -38,9 +41,11 @@ public class Senior {
 
     private String socialId; // 로그인한 소셜 타입의 식별자 값
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "senior")
     private List<Meeting> meetingList = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "senior")
     private List<Enrollment> enrollmentList = new ArrayList<>();
     private String refreshToken;
@@ -63,6 +68,10 @@ public class Senior {
         this.refreshToken = updateRefreshToken;
     }
 
-    public void updateName(String nickname) { this.name = name; }
+    public void updateName(String name) { this.name = name; }
+
+    public void updatePhone(String phone) {
+        this.phone = phone;
+    }
 }
 
