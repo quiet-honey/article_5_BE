@@ -1,9 +1,12 @@
 package com.cotato_hackathon.article5.service;
 
+import com.cotato_hackathon.article5.dto.BoardResponseDto;
 import com.cotato_hackathon.article5.dto.BoardSaveRequestDto;
+import com.cotato_hackathon.article5.entity.Center;
 import com.cotato_hackathon.article5.entity.Meeting;
 import com.cotato_hackathon.article5.repository.CenterRepository;
 import com.cotato_hackathon.article5.repository.MeetingRepository;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +31,7 @@ public class BoardService {
     @Transactional
     public Meeting createMeeting(BoardSaveRequestDto boardSaveRequestDto) {
         final Meeting newMeeting = new Meeting(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getNotice(), boardSaveRequestDto.getPlace(),
-                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getCurrentSenior(), boardSaveRequestDto.getTotalSenior());
+                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getTotalSenior());
         return meetingRepository.save(newMeeting);
     }
 
