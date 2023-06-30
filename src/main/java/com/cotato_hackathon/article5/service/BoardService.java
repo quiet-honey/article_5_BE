@@ -31,7 +31,7 @@ public class BoardService {
     @Transactional
     public Meeting createMeeting(BoardSaveRequestDto boardSaveRequestDto) {
         final Meeting newMeeting = new Meeting(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getNotice(), boardSaveRequestDto.getPlace(),
-                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getTotalSenior());
+                boardSaveRequestDto.getMeetingTime(), boardSaveRequestDto.getCurrentSenior(), boardSaveRequestDto.getTotalSenior());
         return meetingRepository.save(newMeeting);
     }
 
