@@ -31,7 +31,7 @@ public class BoardController {
         return new ResponseEntity("모임 등록이 완료되었습니다. (meetingId: " + meeting.getMeetingId() + ")", HttpStatus.OK);
     }
 
-    //모임 검색 api(검색 후 경로당 조회)
+    //모임 검색 api(검색 후 모임 조회)
     @GetMapping
     public ResponseEntity<BoardSearchResponseDto> getMetting(
             @RequestParam(value = "dis") String dis,
